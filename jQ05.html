@@ -23,7 +23,9 @@
     <script>
       $(document).ready(function () {
         $("img").mouseover(function () {
-          $(this).css("width", "400px");
+          $(this).animate({
+            width: '+=150px'
+          })
         });
 
         $("img").mouseleave(function () {

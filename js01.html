@@ -40,10 +40,14 @@
             var d = new Date();
             name = document.getElementById("name").value;
             year = document.getElementById("year").value;
-            age = d.getFullYear() - year;
-            document.getElementById("kq").innerHTML = 
-            "Chào bạn " + name + "!" + "<br>" +
-            "Tuổi của bạn là " + age;
+            if (name && year) {
+                age = d.getFullYear() - year;
+                document.getElementById("kq").innerHTML = 
+                "Chào bạn " + name + "!" + "<br>" +
+                "Tuổi của bạn là " + age;
+            } else {
+                alert('Vui lòng kiểm tra lại thông tin!');
+            }
         }
     </script>
 </head>

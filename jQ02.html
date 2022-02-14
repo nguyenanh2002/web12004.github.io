@@ -7,112 +7,12 @@
     <script>
       $(document).ready(function () {
         $("button").click(function () {
-          var dayStart = $("input#day-start").val().split("-");
-          var dayEnd = $("input#day-end").val().split("-");
-          var result = 0;
-          //Cùng năm
-          if (dayStart[0] == dayEnd[0]) {
-            if (dayStart[1] == dayEnd[1]) {
-              if (dayStart[2] <= dayEnd[2]) {
-                for (var i = dayStart[1]; i < dayEnd[1]; i++) {
-                  switch (i) {
-                    case 1:case 3:case 5:case 7:case 8:case 10:case 12:
-                      result += 31;
-                      break;
-                    case 2:
-                      if (dayStart[0] % 100 != 0 && dayStart[0] % 4 == 0) {
-                        result += 29;
-                      } else {
-                        result += 28;
-                      }
-                      break;
-                    case 4:case 6:case 9:case 11:
-                      result += 30;
-                      break;
-                  }
-                }
-                result += dayEnd[2] - dayStart[2];
-                $('p').remove();
-                $(this).after(`<p>Số ngày là: ${result}</p>`);
-              }
-              else {
-                $('p').remove();
-                $(this).after(`<p>Thời gian không hợp lệ!</p>`);
-              }
-            } else if (dayStart[1] < dayEnd[1]) {
-              for (var i = dayStart[1]; i <= dayEnd[1]; i++) {
-                switch (i) {
-                  case 1:case 3:case 5:case 7:case 8:case 10:case 12:
-                    result += 31;
-                    break;
-                  case 2:
-                    if (dayStart[0] % 100 != 0 && dayStart[0] % 4 == 0) {
-                      result += 29;
-                    } else {
-                      result += 28;
-                    }
-                    break;
-                  case 4:case 6:case 9:case 11:
-                    result += 30;
-                    break;
-                }
-              }
-              result += dayEnd[2] - dayStart[2];
-              $('p').remove();
-              $(this).after(`<p>Số ngày là: ${result}</p>`);
-            }
-            else {
-                $('p').remove();
-                $(this).after(`<p>Thời gian không hợp lệ!</p>`);
-            }
-          }
-          //Khác năm
-          else if (dayStart[0] < dayEnd[0]) {
-            //Tính số ngày ở năm hiện tại
-            for (var i = dayStart[1]; i <= 12; i++) {
-              switch (i) {
-                case 1:case 3:case 5:case 7:case 8:case 10:case 12:
-                  result += 31;
-                  break;
-                case 2:
-                  if (dayStart[0] % 100 != 0 && dayStart[0] % 4 == 0) {
-                    result += 29;
-                  } else {
-                    result += 28;
-                  }
-                  break;
-                case 4:case 6:case 9:case 11:
-                  result += 30;
-                  break;
-              }
-            }
-            //Tính số ngày ở năm tiếp theo
-            for (var i = 1; i <= dayEnd[1]; i++) {
-              switch (i) {
-                case 1:case 3:case 5:case 7:case 8:case 10:case 12:
-                  result += 31;
-                  break;
-                case 2:
-                  if (dayStart[0] % 100 != 0 && dayStart[0] % 4 == 0) {
-                    result += 29;
-                  } else {
-                    result += 28;
-                  }
-                  break;
-                case 4:case 6:case 9:case 11:
-                  result += 30;
-                  break;
-              }
-            }
-            result += dayEnd[2] - dayStart[2];
-            $('p').remove();
-            $(this).after(`<p>Số ngày là: ${result}</p>`);
-          }
-          // Không hợp lệ
-          else if (dayStart[0] > dayEnd[0]) {
-            $('p').remove();
-            $(this).after(`<p>Thời gian không hợp lệ!</p>`);
-          }
+          var t1 = $('#day-start').val();
+          var t2 = $('#day-end').val();
+          var d1 = new Date(t1);
+          var d2 = new Date(t2);
+          var songay = (d2.getTime() - d1.getTime())/(24*3600*1000);
+          $('#kq').text(`Số ngày là: ${songay}`);
         });
       });
     </script>
@@ -151,6 +51,7 @@
       </tr>
     </table>
     <button>Tính số ngày</button>
+    <div id="kq"></div>
     <div id="back-btn" align="center"><a href="/jquery.html">Về trang JQUERY</a></div>
   </body>
 </html>

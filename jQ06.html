@@ -52,36 +52,43 @@
           x: parseInt($("div.rect").css("left")),
           y: parseInt($("div.rect").css("top")),
         };
-        console.log(hinhchunhat.x, hinhchunhat.y);
         //Qua trái
         $("button#left").click(function () {
           if (hinhchunhat.x > 0) {
-            hinhchunhat.x -= 10;
-            $("div.rect").css("left", hinhchunhat.x);
+            hinhchunhat.x -= 20;
+            $("div.rect").animate({
+              left: `${hinhchunhat.x}`
+            }, 200)
           }
         });
 
         //Qua phải
         $("button#right").click(function () {
           if (hinhchunhat.x < 400) {
-            hinhchunhat.x += 10;
-            $("div.rect").css("left", hinhchunhat.x);
+            hinhchunhat.x += 20;
+            $("div.rect").animate({
+              left: `${hinhchunhat.x}`
+            }, 200)
           }
         });
 
         //Lên trên
         $("button#top").click(function () {
           if (hinhchunhat.y > 0) {
-            hinhchunhat.y -= 10;
-            $("div.rect").css("top", hinhchunhat.y);
+            hinhchunhat.y -= 20;
+            $("div.rect").animate({
+              top: `${hinhchunhat.y}`
+            }, 200)
           }
         });
 
         //Xuống dưới
         $("button#bottom").click(function () {
           if (hinhchunhat.y < 200) {
-            hinhchunhat.y += 10;
-            $("div.rect").css("top", hinhchunhat.y);
+            hinhchunhat.y += 20;
+            $("div.rect").animate({
+              top: `${hinhchunhat.y}`
+            }, 200)
           }
         });
       });

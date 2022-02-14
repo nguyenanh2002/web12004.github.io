@@ -5,11 +5,22 @@
     <title>JQUERY 01</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        function checkSimilar(string) {
+            const list = $('ul').children();
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].innerHTML.toUpperCase() === string.toUpperCase()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         $(document).ready(function() {
             $('input#name-subject').keypress(function(event) {
                 var key = event.keyCode;
                 var str = $('input#name-subject').val();
-                if(key == '13' && str) {
+                str = str.trim();
+                if(key == '13' && str && checkSimilar(str) === false) {
                     $('ul.subjects').append(`<li>${str}</li>`);
                     $('input#name-subject').val("");
                 }  
@@ -17,10 +28,12 @@
 
             $('button').click(function() {
                 var str = $('input#name-subject').val();
-                    if (str) {
+                str = str.trim();
+                    if (str && checkSimilar(str) === false) {
                         $('ul.subjects').append(`<li>${str}</li>`);
                         $('input#name-subject').val("");
                     } 
+                    checkSimilar(str);
             });
         });
     </script>
